@@ -17,7 +17,9 @@ public class ServiceDisplayer {
 
   public void display() {
     System.out.println();
-    System.out.printf("Name: %s", serviceDetails.getName());
+    System.out.printf("Service: %s", serviceDetails.getService().name());
+    System.out.println();
+    System.out.printf("Name: %s", serviceDetails.getReleaseName());
     System.out.println();
     System.out.printf(
         "Last updated: %s",
@@ -33,7 +35,10 @@ public class ServiceDisplayer {
     System.out.println();
   }
 
-  public ServiceDetails askDetails(String name) {
+  public ServiceDetails askDetails(Service service) {
+    System.out.println("Release name? (REL2020-10-16)");
+    String releaseName = new Scanner(System.in).next();
+
     System.out.println("Who is currently testing? (xxx,zzz separated names)");
 
     Scanner peopleInput = new Scanner(System.in);
@@ -42,9 +47,7 @@ public class ServiceDisplayer {
     System.out.println("Any additionalInfo?");
     String comment = new Scanner(System.in).next();
 
-    ServiceDetails serviceDetails = new ServiceDetails(name, LocalDateTime.now(), people, comment);
-
-    return serviceDetails;
+    return new ServiceDetails(service, releaseName, LocalDateTime.now(), people, comment);
   }
 
   public ServiceDetails getServiceDetails() {

@@ -5,28 +5,39 @@ import java.util.List;
 
 public class ServiceDetails {
 
-  private final String name;
+  private final Service service;
+  private final String releaseName;
   private final LocalDateTime lastUpdated;
   private final List<String> peopleTesting;
   private final String comments;
 
   public ServiceDetails(
-      String name, LocalDateTime lastUpdated, List<String> peopleTesting, String comments) {
-    this.name = name;
+      Service service,
+      String releaseName,
+      LocalDateTime lastUpdated,
+      List<String> peopleTesting,
+      String comments) {
+    this.service = service;
+    this.releaseName = releaseName;
     this.lastUpdated = lastUpdated.withNano(0);
     this.peopleTesting = peopleTesting;
     this.comments = comments;
   }
 
   public ServiceDetails() {
-    this.name = "NOT SET";
+    this.service = Service.UNKNOWN;
     this.lastUpdated = LocalDateTime.now().withNano(0);
     this.peopleTesting = List.of();
     this.comments = "NOT SET";
+    this.releaseName = "NOT SET";
   }
 
-  public String getName() {
-    return name;
+  public Service getService() {
+    return service;
+  }
+
+  public String getReleaseName() {
+    return releaseName;
   }
 
   public LocalDateTime getLastUpdated() {

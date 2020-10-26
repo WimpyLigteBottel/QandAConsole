@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class MenuFlowController {
 
-  Map<Enviroment, Map<Service, ServiceDetails>> map = new HashMap<>();
+  static Map<Enviroment, Map<Service, ServiceDetails>> map = new HashMap<>();
 
   public void start() {
 
@@ -34,7 +34,7 @@ public class MenuFlowController {
     }
   }
 
-  public void setup() {
+  private void setup() {
     Map<Service, ServiceDetails> intdev = new HashMap<>();
     for (int i = 0; i < Service.values().length; i++) {
       intdev.put(Service.values()[i], new ServiceDetails());
@@ -79,8 +79,8 @@ public class MenuFlowController {
       case "2": // IBANK
         new ServiceDisplayer(serviceMap.get(Service.IBANK)).display();
         break;
-      case "3": // RANDOM SERVICE
-        new ServiceDisplayer(serviceMap.get(Service.OTHER_SERVICES)).display();
+      case "3": // UNKNOWN
+        new ServiceDisplayer(serviceMap.get(Service.UNKNOWN)).display();
         break;
       case "99":
         System.out.println("EXIT PROGRAMING");
@@ -97,15 +97,15 @@ public class MenuFlowController {
     switch (new EnvironmentMenu(enviroment).getMenu()) {
       case "1": // MBANK
         name = Service.MBANK;
-        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name.name()));
+        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name));
         break;
       case "2": // IBANK
         name = Service.IBANK;
-        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name.name()));
+        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name));
         break;
-      case "3": // RANDOM SERVICE
-        name = Service.OTHER_SERVICES;
-        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name.name()));
+      case "3": // UNKNOWN
+        name = Service.UNKNOWN;
+        serviceMap.put(name, new ServiceDisplayer(serviceMap.get(name)).askDetails(name));
         break;
       case "99":
         System.out.println("EXIT PROGRAMING");
